@@ -1,5 +1,7 @@
 # swcursor
 
+![swcursor example screenshot](screenshot.png)
+
 This is a simple software cursor for X11 environments,
 it creates an overlay window with an (large) image that
 follows the cursor around. You will need to arrange
