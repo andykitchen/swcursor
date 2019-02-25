@@ -112,6 +112,12 @@ static void swcursor_window_realize(GtkWidget *widget)
 
 	GdkWindow *gdk_window;
 
+	gtk_window_set_decorated(GTK_WINDOW (widget), FALSE);
+	gtk_window_set_keep_above(GTK_WINDOW (widget), TRUE);
+	gtk_window_set_skip_taskbar_hint(GTK_WINDOW (widget), TRUE);
+	gtk_window_set_skip_pager_hint(GTK_WINDOW (widget), TRUE);
+	gtk_window_set_type_hint(GTK_WINDOW (widget), GDK_WINDOW_TYPE_HINT_DND);
+
 	gdk_window = gtk_widget_get_window(widget);
 	gdk_window_set_override_redirect(gdk_window, TRUE);
 	gdk_window_set_decorations(gdk_window, 0);
