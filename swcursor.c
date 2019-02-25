@@ -56,9 +56,10 @@ static void show_main_window(cairo_surface_t *image)
 	gtk_widget_show_all(GTK_WIDGET (window));
 }
 
-
 static gboolean tick(GtkWidget *widget, GdkFrameClock *frame_clock, gpointer user_data)
 {
+	static gboolean show_warning = TRUE;
+
 	GdkWindow *gdk_window;
 	Display *xdisplay;
 	Window xroot_window;
@@ -92,6 +93,11 @@ static gboolean tick(GtkWidget *widget, GdkFrameClock *frame_clock, gpointer use
 		             (mask & Button3Mask);
 
 		swcursor_window_set_mouse_down(SWCURSOR_WINDOW (widget), mouse_down);
+	} else {
+		if (show_warning) {
+			fprintf(stderr, "swcursor: warning: could not get cursor position from Xserver (further warnings will be suppressed)");
+			show_warning = FALSE;
+		}
 	}
 
 	return G_SOURCE_CONTINUE;

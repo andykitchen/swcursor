@@ -1,5 +1,7 @@
 #include "swcursor-window.h"
 
+#include <stdio.h>
+
 #include <X11/Xlib.h>
 #include <X11/extensions/shape.h>
 
@@ -92,7 +94,16 @@ static void swcursor_window_setup_visuals(GtkWidget *widget)
 
 	screen = gtk_widget_get_screen(widget);
 	visual = gdk_screen_get_rgba_visual(screen);
-	gtk_widget_set_visual(widget, visual);
+
+	if(!gdk_screen_is_composited(screen)) {
+		fprintf(stderr, "swcursor: warning: screen is not composited, YMMV");
+	}
+
+	if (visual) {
+		gtk_widget_set_visual(widget, visual);
+	} else {
+		fprintf(stderr, "swcursor: warning: could not make window transparent");
+	}
 }
 
 static void swcursor_window_realize(GtkWidget *widget)
@@ -130,7 +141,7 @@ static void swcursor_window_map(GtkWidget *widget)
 void swcursor_window_set_image(SWCursorWindow *window, cairo_surface_t *image)
 {
 	int imgw, imgh;
-	
+
 	imgw = cairo_image_surface_get_width(image);
 	imgh = cairo_image_surface_get_height(image);
 	gtk_window_set_default_size(GTK_WINDOW (window), imgw, imgh);
@@ -147,7 +158,7 @@ cairo_surface_t *swcursor_window_get_image(SWCursorWindow *window)
 void swcursor_window_set_mouse_down(SWCursorWindow *window, gboolean mouse_down)
 {
 	if (window->mouse_down != mouse_down)
-			gtk_widget_queue_draw(GTK_WIDGET (window));
+		gtk_widget_queue_draw(GTK_WIDGET (window));
 
 	window->mouse_down = mouse_down;
 }
