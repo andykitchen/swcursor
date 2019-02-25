@@ -87,7 +87,7 @@ static gboolean tick(GtkWidget *widget, GdkFrameClock *frame_clock, gpointer use
 		move_y = root_y / scale_factor - 1;
 
 		gtk_window_move(GTK_WINDOW (widget), move_x, move_y);
-		
+
 		mouse_down = (mask & Button1Mask) ||
 		             (mask & Button2Mask) ||
 		             (mask & Button3Mask);

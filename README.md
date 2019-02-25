@@ -36,4 +36,4 @@ a reasonably minimal example of creating a GTK window and then
 manipulating it with lower level commands from GDK and Xlib.
 The two non-trivial things are making the window transparent,
 and removing all decoration. The X11 shape extension is used
-to make the winow click-through.
+to make the window click-through.

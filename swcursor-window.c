@@ -31,7 +31,7 @@ swcursor_window_dispose(GObject *gobject)
 }
 
 static void
-swcursor_window_class_init(SWCursorWindowClass *klass) 
+swcursor_window_class_init(SWCursorWindowClass *klass)
 {
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -44,7 +44,7 @@ swcursor_window_class_init(SWCursorWindowClass *klass)
 	object_class->dispose = swcursor_window_dispose;
 }
 
-static void 
+static void
 swcursor_window_init(SWCursorWindow *self)
 {
 	self->image = NULL;
